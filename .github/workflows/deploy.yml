@@ -21,6 +21,7 @@ jobs:
           for d in batch-1-pages*/; do
             [ -d "$d" ] && cp -n "$d"* _site/ 2>/dev/null || true
           done
+          cp -n *.mp4 _site/uploads/ 2>/dev/null || true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
