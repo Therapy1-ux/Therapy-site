@@ -24,6 +24,7 @@ jobs:
           cp -n *.mp4 _site/uploads/ 2>/dev/null || true
           cp -f "batch-1-pages 3/fathers-day-upload 2/"* _site/ 2>/dev/null || true
           cp -f "batch-1-pages 3/seo-fix-upload/"* _site/ 2>/dev/null || true
+          cp -f "batch-1-pages 3/fathers-day-upload 2/uploads/"* _site/uploads/ 2>/dev/null || true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
