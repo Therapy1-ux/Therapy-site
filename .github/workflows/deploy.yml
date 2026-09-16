@@ -18,16 +18,13 @@ jobs:
           for d in */; do
             if [ -d "${d}uploads" ]; then cp -rn "${d}uploads/." _site/uploads/; fi
           done
-          for d in batch-1-pages*/; do
-            [ -d "$d" ] && cp -n "$d"* _site/ 2>/dev/null || true
-          done
           cp -n *.mp4 _site/uploads/ 2>/dev/null || true
-          cp -f "batch-1-pages 3/fathers-day-upload 2/"* _site/ 2>/dev/null || true
-          cp -f "batch-1-pages 3/seo-fix-upload/"* _site/ 2>/dev/null || true
-          cp -f "batch-1-pages 3/fathers-day-upload 2/uploads/"* _site/uploads/ 2>/dev/null || true
-          cp -f "batch-1-pages 3/seo-fix-upload/fd-both-upload/"* _site/ 2>/dev/null || true
-          cp -f "batch-1-pages 3/seo-fix-upload/fd-both-upload/uploads/"* _site/uploads/ 2>/dev/null || true
-          cp -rf "seo-audit-pack/"* _site/ 2>/dev/null || true
+          cp -rf "seo-audit-pack 3/"* _site/ 2>/dev/null || true
+          for d in about all-access cafe contact dining events frequently-asked-questions memberships packages privacy-policy referral-form services terms-conditions; do
+            if [ -d "$d" ]; then cp -rf "$d" _site/; fi
+          done
+          cp -f *.html _site/ 2>/dev/null || true
+          cp -f *.js *.txt *.xml _site/ 2>/dev/null || true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
