@@ -19,7 +19,7 @@
 <body>
 <x-dc>
 <helmet>
-<script src="expertise-data.js?v=20261106b"></script>
+<script src="expertise-data.js?v=20261106c"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Marcellus&display=swap" rel="stylesheet">
@@ -56,7 +56,7 @@ a{text-decoration:none;color:inherit}::selection{background:#9c7a57;color:#F2ECE
 
 </div></section>
 <sc-if value="{{ introAbove }}" hint-placeholder-val="{{ true }}">
-<section style="padding:clamp(56px,7vw,96px) 28px"><div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:40px clamp(40px,6vw,88px)"><sc-if value="{{ p.introSlot }}" hint-placeholder-val="{{ false }}"><div style="flex:1 1 360px;max-width:520px;position:relative;aspect-ratio:4/5"><image-slot id="{{ p.introSlot }}" shape="rect" src="{{ p.introImg }}" placeholder="Drop a skin treatment photo" style="position:absolute;inset:0;width:100%;height:100%"></image-slot><div style="position:absolute;top:-14px;left:-14px;width:72px;height:72px;border-top:1px solid #BD8A4C;border-left:1px solid #BD8A4C;pointer-events:none"></div><div style="position:absolute;right:-14px;bottom:-14px;width:72px;height:72px;border-right:1px solid #BD8A4C;border-bottom:1px solid #BD8A4C;pointer-events:none"></div></div></sc-if><div style="flex:1 1 460px;max-width:900px;display:flex;flex-direction:column;gap:18px">
+<section style="padding:clamp(56px,7vw,96px) 28px"><div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:40px clamp(40px,6vw,88px)"><sc-if value="{{ p.introSlot }}" hint-placeholder-val="{{ false }}"><div style="flex:1 1 360px;max-width:520px;position:relative;aspect-ratio:4/5"><img src="{{ p.introImg }}" alt="Skin treatment at THERAPY" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><div style="position:absolute;top:-14px;left:-14px;width:72px;height:72px;border-top:1px solid #BD8A4C;border-left:1px solid #BD8A4C;pointer-events:none"></div><div style="position:absolute;right:-14px;bottom:-14px;width:72px;height:72px;border-right:1px solid #BD8A4C;border-bottom:1px solid #BD8A4C;pointer-events:none"></div></div></sc-if><div style="flex:1 1 460px;max-width:900px;display:flex;flex-direction:column;gap:18px">
   <div style="display:flex;align-items:center;gap:12px"><span style="display:block;width:38px;height:1px;background:#BD8A4C;flex:none"></span><span style="font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#9c7a57">What we bring together</span></div>
   <sc-for list="{{ leadParas }}" as="lp" hint-placeholder-count="0"><p style="font-size:16.5px;line-height:1.75;color:#4A4038;margin:0;text-wrap:pretty">{{ lp }}</p></sc-for>
   <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.6vw,32px);line-height:1.4;color:#2A1E14;margin:0;text-wrap:pretty">{{ p.together }}</p>
@@ -434,7 +434,7 @@ a{text-decoration:none;color:inherit}::selection{background:#9c7a57;color:#F2ECE
   <div style="display:flex;flex-direction:column;gap:clamp(56px,7vw,96px)">
     <sc-for list="{{ concernGroups }}" as="g" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:36px clamp(40px,6vw,96px);align-items:center">
       <div style="order:{{ g.imgOrder }};position:relative;aspect-ratio:5/4;background:#E9DFD0">
-        <sc-if value="{{ g.slot }}" hint-placeholder-val="{{ true }}"><image-slot id="{{ g.slot }}" shape="rect" placeholder="{{ g.ph }}" style="position:absolute;inset:0;width:100%;height:100%"></image-slot></sc-if>
+        <sc-if value="{{ g.slot }}" hint-placeholder-val="{{ true }}"><img src="{{ g.img }}" alt="{{ g.h }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
         <sc-if value="{{ g.before }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#F7F2EA"><div style="position:relative;overflow:hidden;background:#fff"><img src="{{ g.before }}" alt="Before PRP hair treatment" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span style="position:absolute;left:14px;bottom:14px;padding:6px 12px;background:rgba(30,21,12,0.78);color:#F7F0E4;font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase">Before</span></div><div style="position:relative;overflow:hidden;background:#fff"><img src="{{ g.after }}" alt="After PRP hair treatment" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><span style="position:absolute;left:14px;bottom:14px;padding:6px 12px;background:#BD8A4C;color:#1E150C;font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase">After</span></div></div></sc-if>
         <div style="position:absolute;top:-14px;left:-14px;width:72px;height:72px;border-top:1px solid #BD8A4C;border-left:1px solid #BD8A4C;pointer-events:none"></div>
         <div style="position:absolute;right:-14px;bottom:-14px;width:72px;height:72px;border-right:1px solid #BD8A4C;border-bottom:1px solid #BD8A4C;pointer-events:none"></div>
@@ -456,7 +456,7 @@ a{text-decoration:none;color:inherit}::selection{background:#9c7a57;color:#F2ECE
   </div>
   <div style="width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:28px">
     <sc-for list="{{ p.prices.tables }}" as="tb" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(74,53,32,0.35) 0%,rgba(30,21,12,0.2) 100%);border:1px solid rgba(227,185,140,0.22)">
-      <div style="position:relative;aspect-ratio:4/3;background:#2A1F16;border-bottom:1px solid rgba(227,185,140,0.3)"><image-slot id="{{ tb.slot }}" shape="rect" placeholder="{{ tb.ph }}" style="position:absolute;inset:0;width:100%;height:100%"></image-slot></div>
+      <div style="position:relative;aspect-ratio:4/3;background:#2A1F16;border-bottom:1px solid rgba(227,185,140,0.3)"><img src="{{ tb.img }}" alt="{{ tb.h }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div>
       <div style="display:flex;flex-direction:column;padding:28px 28px 32px">
         <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:28px;line-height:1.1;color:#E8C9A6;margin:0 0 20px;min-height:2.2em;text-wrap:balance">{{ tb.h }}</h3>
         <div style="display:grid;grid-template-columns:1fr 64px 72px;gap:10px;padding-bottom:10px;border-bottom:1px solid rgba(227,185,140,0.55)"><span></span><span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#9C8B78;text-align:right">Single</span><span style="font-size:9.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#9C8B78;text-align:right">Course ×3</span></div>
