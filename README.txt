@@ -1,23 +1,26 @@
-THERAPY site update — 6 Nov 2026
+THERAPY site update — 11 Nov 2026
 Repo: Therapy1-ux/therapy-site (branch: main)
 
-HOW TO UPLOAD
-1. Unzip this folder on your computer.
-2. Go to github.com/Therapy1-ux/therapy-site
-3. Add file > Upload files.
-4. Drag in EVERYTHING inside this folder (the .html files, the .js files, "Expertise Pillar.dc.html", "Expertise Card.dc.html" and the uploads folder). Do not drag the outer folder itself.
-5. Commit message: "Nov 6 update - Momence deep links, expertise pages, programmes". Choose "Commit directly to main".
-6. Wait ~2 minutes for GitHub Pages to rebuild, then hard-refresh yourtherapy.au (Ctrl/Cmd + Shift + R).
+WHAT'S IN HERE
+- index.html ............... Homepage: 7 areas list, brass "As seen in", past events removed, new section order
+- sorrento.html ............ NEW page: THERAPY × Hotel Sorrento (Square booking links, Run Club × Nova 100)
+- events.html .............. Past Oct/Nov events removed
+- Expertise Pillar.dc.html . Sleep pathways 8 / 10–12 weeks, Olivia 7 Nov box removed
+- expertise-data.js ........ Pathway data
+- batch-nov11-images/uploads/ ... new photos
+- eltham_therapy_trial_trimmed.mp4 ... Run Club video
 
-If GitHub says the upload is too large (100 files max per upload), do it in two goes:
-  a) everything except the uploads folder
-  b) the uploads folder on its own
+HOW TO UPLOAD
+1. Unzip on your computer.
+2. github.com/Therapy1-ux/therapy-site > Add file > Upload files.
+3. Drag in EVERYTHING inside this folder (not the folder itself). Keep "batch-nov11-images" as a folder.
+4. Commit message: "Nov 11 update - Sorrento page, homepage cleanup". Commit directly to main.
+5. Wait ~2 minutes, then hard-refresh yourtherapy.au (Ctrl/Cmd + Shift + R).
+
+Do not rename "Expertise Pillar.dc.html" or "expertise-data.js".
 
 CHECK AFTER UPLOAD
-- yourtherapy.au/expertise-sleep-hormones-womens-health.html shows the programmes sections
-- yourtherapy.au/expertise-skin-regenerative-health.html shows "What we treat" + pricing
-- A Book button on services.html opens the exact Momence service
-- yourtherapy.au/events.html shows the Christmas function section
-
-DO NOT RENAME "Expertise Pillar.dc.html", "Expertise Card.dc.html" or "expertise-data.js" — the expertise pages load them by these exact names.
-Videos (.mp4) are not included — they are already in the repo.
+- yourtherapy.au — gold "Hotel Sorrento" button opens yourtherapy.au/sorrento.html
+- sorrento.html — photos load, Run Club video plays, NeuroSuite / Lobby / Rooftop buttons open Square
+- events.html — nothing before 11 November
+- expertise-sleep-hormones-womens-health.html — pathways show 8 and 10–12 weeks
