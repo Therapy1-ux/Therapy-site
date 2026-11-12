@@ -1,31 +1,30 @@
 // Single source for the seven Areas of Expertise. Used by Homepage, Expertise index, pillar template and Women's Sleep Program.
 (function(){
-const BOOK = 'https://momence.com/appointments/appointment-reservation/143784';
+function build(){
+const BOOK = '__BOOK__'; // sentinel: resolved to a slug URL from data/booking.js at the end of this file
 const S = 'Services.dc.html';
-// Momence deep links: service name -> serviceId (board 103060). Fill from each service's Momence booking URL (…?boardId=103060&serviceId=XXXXX).
-const BOARD = 103060;
 const STUDIO_URL = 'https://momence.com/u/therapy-JtQjAN';
 const ENQ = (s) => 'mailto:hello@yourtherapy.au?subject='+encodeURIComponent(s+' enquiry');
-const NURSE = 377799; // diagnostics without their own Momence service route to a nurse consult
-const MOMENCE_IDS = {
- 'Registered Nurses':NURSE, 'Nurse Consultation':NURSE,
- 'IV Drips & Infusions':364834, 'IV Therapy':364834, 'Iron Infusions':364834,
- 'Neuro-Suite Therapies':137367, 'The NeuroSuite':137367, 'BrainTap':137367, 'Pulsetto vagus-nerve support':137367, 'Red Light & PEMF Therapy':137367, 'Recovery Boots':137367, 'NormaTec Compression Boots':137367, 'Infrared / Red Light Therapy':137367,
- 'Exomind':138174,
- 'Psychology':165740,
- 'Physiotherapy & Myotherapy':309494,
- 'Cryotherapy':137119, 'Localised Cryotherapy':137127, 'Cryo Facial':137126, 'Localised Cryo Facial':137126,
- 'Hyperbaric Oxygen Therapy':143210, 'Infrared Sauna & Bed':137122, 'Infrared Sauna':137122,
- 'PBM Light Bed':137120, 'HOCATT':137445,
- 'ReOxy IHHT':137444, 'ReOxy IHHT for perimenopause':137444, 'OligoScan':137446,
- 'Technogym Physical Assessment':137123,
- 'Massage':358560, 'REGULATE Massage':358560, 'REGULATE + Aroma':359665, 'Aromatherapy Massage':359665, 'REGULATE + Stone':359666, 'Hot Stone Massage':359666,
- 'RESTORE Facial':358664, 'Facials':358664, 'RESTORE+ Facial':359667, 'RESTORE + PBM':359669, 'The Regeneration Ritual':359670,
- 'VO2 Max Testing':NURSE, 'Technogym AI Body Composition Scan':NURSE, 'Functional pathology':NURSE, 'Personalised health mapping':NURSE, 'Personalised gut protocols':NURSE,
- 'THERAPY Studio':STUDIO_URL, '9D Breathwork':STUDIO_URL, 'Breathwork & Mindfulness':STUDIO_URL,
- 'Perimenopause & menopause':'mailto:hello@yourtherapy.au?subject=Perimenopause%20%26%20Menopause%20Programme%20%E2%80%94%20nurse%20enquiry', 'Menopause-informed medical review':ENQ('Menopause medical review'), 'Telehealth GP & in-house clinics':ENQ('GP telehealth')
+const B = window.THERAPY_BOOKING;
+// Service display name -> booking slug (data/booking.js is the only place URLs/IDs live)
+const SLUGS = {
+ 'Registered Nurses':'nurse-consult', 'Nurse Consultation':'nurse-consult', 'Personalised health mapping':'nurse-consult', 'Personalised gut protocols':'nurse-consult',
+ 'IV Drips & Infusions':'iv-infusion', 'IV Therapy':'iv-infusion', 'Iron Infusions':'iron-infusion',
+ 'Neuro-Suite Therapies':'neurosuite', 'The NeuroSuite':'neurosuite', 'BrainTap':'braintap', 'Pulsetto vagus-nerve support':'pulsetto', 'Red Light & PEMF Therapy':'pemf', 'Recovery Boots':'normatec', 'NormaTec Compression Boots':'normatec', 'Infrared / Red Light Therapy':'red-light-panels', 'Hydrogen Inhalation':'hydrogen-inhalation', 'VR Meditation':'vr-meditation',
+ 'Exomind':'exomind', 'Psychology':'psychology', 'Physiotherapy & Myotherapy':'physio',
+ 'Cryotherapy':'cryotherapy', 'Localised Cryotherapy':'cryo-localised', 'Cryo Facial':'cryo-facial', 'Localised Cryo Facial':'cryo-facial',
+ 'Hyperbaric Oxygen Therapy':'hbot', 'Infrared Sauna & Bed':'infrared-sauna', 'Infrared Sauna':'infrared-sauna', 'PBM Light Bed':'pbm-bed', 'HOCATT':'hocatt',
+ 'ReOxy IHHT':'reoxy', 'ReOxy IHHT for perimenopause':'reoxy', 'OligoScan':'oligoscan', 'Technogym Physical Assessment':'technogym-assessment',
+ 'Massage':'massage-regulate', 'REGULATE Massage':'massage-regulate', 'REGULATE + Aroma':'massage-aroma', 'Aromatherapy Massage':'massage-aroma', 'REGULATE + Stone':'massage-stone', 'Hot Stone Massage':'massage-stone',
+ 'RESTORE Facial':'facial-restore', 'Facials':'facial-restore', 'RESTORE+ Facial':'facial-restore-plus', 'RESTORE + PBM':'facial-restore-pbm', 'SKIN RESET':'facial-skin-reset', 'Skin Reset':'facial-skin-reset', 'The Regeneration Ritual':'regeneration-ritual',
+ 'Topical Exosome Therapy':'exosome-therapy',
+ 'VO2 Max Testing':'vo2-max', 'Technogym AI Body Composition Scan':'body-composition', 'Functional pathology':'functional-pathology',
+ 'Perimenopause & menopause':'hormone-consult', 'Menopause-informed medical review':'hormone-consult', 'Telehealth GP & in-house clinics':'gp-telehealth',
+ 'Nervous System Regulation':'nervous-system-regulation', "Women's Sleep Program":'womens-sleep-program', 'Women’s Sleep Program':'womens-sleep-program',
+ '9D Breathwork':'breathwork', 'Breathwork & Mindfulness':'breathwork', 'THERAPY Studio':'studio-classes'
 };
-const bookFor = (name) => { const id = MOMENCE_IDS[name]; return !id ? BOOK : typeof id === 'string' ? id : BOOK+'?boardId='+BOARD+'&serviceId='+id; };
+const NON_BOOKING = { 'THERAPY Studio':'THERAPY%20Studio%20v4.dc.html' }; // area links that open a page, not a booking
+const bookFor = (name) => B.bookingUrl(SLUGS[name] || 'nurse-consult');
 const chip = (label, href) => ({ label, href: href || null });
 
 const OLIVIA = {
@@ -46,7 +45,7 @@ const pillars = [
    card:'Psychology, mental health care and nervous system regulation — starting with understanding you, not a label.',
    intro:'Your nervous system shapes how you think, feel, respond to stress and move through everyday life. We start there.',
    together:'We bring together psychology, neurofeedback, nervous system education, breathwork and our six-week Nervous System Regulation program — one connected approach to mental health.',
-   programs:[{n:'01',img:'uploads/Restore-single-woman.png',pos:'center 60%',title:'Nervous System Reset',tagline:'Six weeks. One system.',body:'A structured six-week program combining nervous system education, breathwork, neurotechnology and practitioner guidance — designed to move you out of chronic stress and build lasting regulation skills.',meta:'Six-week program',href:BOOK,cta:'Enquire'},
+   programs:[{n:'01',img:'uploads/Restore-single-woman.png',pos:'center 60%',title:'Nervous System Reset',tagline:'Six weeks. One system.',body:'A structured six-week program combining nervous system education, breathwork, neurotechnology and practitioner guidance — designed to move you out of chronic stress and build lasting regulation skills.',meta:'Six-week program',href:BOOK,booking:'nervous-system-regulation',cta:'Enquire'},
              {n:'02',img:'uploads/Calm%20Pilates%20class%20on%20peach%20mats.png',pos:'center 62%',title:'Co-regulation',tagline:'We regulate better together.',body:'Our nervous systems are wired to settle in safe connection with others. Guided co-regulation practice uses breath, presence and attuned connection to help you feel calmer, safer and more grounded — then carry that into your relationships.',meta:'Program',href:BOOK,cta:'Enquire'}],
    feature:{kicker:'Featured technology', title:'Exomind™', tagline:'Focused brain stimulation. No medication, no downtime.', img:'uploads/THERAPY_Exomind_crop.png',
      lead:'Exomind™ is a next-generation transcranial magnetic stimulation (TMS) system from BTL. It is non-invasive and drug-free, and sits alongside psychology at THERAPY™ as another way to support mood, focus and emotional resilience.',
@@ -60,7 +59,7 @@ const pillars = [
        blocks:[{h:'Why we test your blood and saliva',t:'Comprehensive bloodwork, together with a 4-point saliva cortisol test, can reveal drivers of low mood, anxiety and brain fog that are easy to miss. These results help us build a plan for both mind and body, which may include nutrition, supplementation, IV therapy, psychology or Exomind™.',list:['Hormones — oestrogen, progesterone, testosterone and thyroid','4-point saliva cortisol — your stress-hormone rhythm from waking to bedtime','Nutrients — vitamin B12, vitamin D, magnesium and iron','Inflammation and oxidative stress markers','Metabolic and adrenal function']},
                {h:'Menopause, hormones and mood',t:'Perimenopause and menopause can bring anxiety, poor sleep, irritability and low mood, driven by significant hormonal change. These symptoms are not simply part of getting older. They are signals worth understanding, and with the right testing and support you can feel like yourself again.'},
                {h:'Mental health on GLP-1 medication',t:'GLP-1 medications can be very effective for weight management, but some people notice muscle loss, low energy or changes in mood along the way. If you are on a GLP-1 prescribed by your doctor, we can support you alongside them with metabolic testing, strength and muscle-preserving programs, nutrition and mental wellbeing care, so weight loss does not come at the cost of clarity or vitality.'},{h:'Why the mind comes first',t:'Anxiety, low motivation, broken sleep and brain fog make it harder to keep up healthy routines, make clear decisions and get the most from any treatment. Supporting your mental wellbeing first makes everything else work better.'}]},
-     note:'Exomind™ is a wellness technology and is not a substitute for medical or psychiatric diagnosis or treatment. If you are in crisis, call Lifeline on 13 11 14 or 000 in an emergency.', href:BOOK, cta:'Book an Exomind™ consultation'},
+     note:'Exomind™ is a wellness technology and is not a substitute for medical or psychiatric diagnosis or treatment. If you are in crisis, call Lifeline on 13 11 14 or 000 in an emergency.', href:BOOK, booking:'exomind', cta:'Book an Exomind™ consultation'},
    explore:[chip('Psychologist Eltham','Allied%20Health.dc.html'),chip('Nervous system regulation'),chip('Stress and burnout'),chip('Emotional regulation'),chip('Co-regulation'),chip('9D Breathwork'),chip('Neurofeedback'),chip('Cognitive wellbeing'),chip('NeuroSuite','Expertise%20Brain%20Mind%20Nervous%20System.dc.html')],
    services:[{name:"Psychology",img:'uploads/THERAPY_PshycologyRoom.jpg',area:"Allied Health",mind:"Evidence-based therapy (CBT, ACT and nervous-system-informed approaches) for anxiety, low mood, stress, burnout and trauma, delivered by AHPRA-registered psychologists.",body:"Works with the physiological side of stress — sleep disruption, muscle tension and autonomic arousal. Potentially Medicare-rebatable with a GP Mental Health Treatment Plan.",href:BOOK,cta:'Book'},{name:"Neuro-Suite Therapies",img:'uploads/THERAPY_ServicesArea_Red%20Light%20Panels_BrainTap.jpg',area:"Mind & Neuro",mind:"Stacks modalities studied for their effects on autonomic balance, focus and sleep quality into one session.",body:"Designed to support parasympathetic (rest-and-digest) activity and physiological recovery.",href:BOOK,cta:'Book'},{name:"BrainTap",img:'uploads/THERAPY_BrainTap.jpg',area:"Mind & Neuro",mind:"Light and sound entrainment designed to guide brainwave states associated with relaxation and focus.",body:"Supports a down-regulated stress response; sessions are often used to wind down before sleep.",href:BOOK,cta:'Book'},{name:"Exomind",img:'uploads/THERAPY_Exomind_crop.png',area:"Mind & Neuro",mind:"Non-invasive transcranial magnetic stimulation (TMS) delivers focused magnetic pulses to the prefrontal cortex — the brain region involved in mood, motivation, decision-making and impulse control — while you sit comfortably and fully awake.",body:"Short, drug-free sessions with no downtime; typically delivered as a course. Suitability is assessed before starting.",href:BOOK,cta:'Book'},{name:"9D Breathwork",img:'uploads/Calm%20Pilates%20class%20on%20peach%20mats.png',area:"Mind & Neuro",mind:"A guided, conscious connected breathing journey layered with 3D binaural sound, voice guidance and music — designed to help release stored stress and emotional tension. Available as 1:1 sessions or group work.",body:"Connected breathing shifts carbon dioxide and oxygen balance and engages the autonomic nervous system, followed by a deep rest phase associated with parasympathetic (rest-and-digest) activity.",href:BOOK,cta:'Book 1:1 or group'},{name:"Breathwork & Mindfulness",img:'uploads/Calm%20Pilates%20class%20on%20peach%20mats.png',area:"Mind & Neuro",mind:"Structured breathing protocols researched for their influence on perceived stress and emotional regulation.",body:"Slow-paced breathing is associated with improved heart rate variability and vagal tone.",href:BOOK,cta:'Book'},{name:"Pulsetto vagus-nerve support",img:'uploads/THERAPY_Pulsetto_02.jpg',area:"Mind & Neuro",mind:"Non-invasive vagus nerve stimulation, explored for its role in stress, anxiety and sleep.",body:"Designed to support parasympathetic activity and heart rate variability.",href:BOOK,cta:'Book'}] },
  { num:'02', slug:'sleep-hormones-womens-health', noHeroImg:true, img:'uploads/Two%20women%20in%20a%20restorative%20studio.png', file:'Expertise%20Sleep%20Hormones%20Womens%20Health.dc.html', color:'#7C5B38', alt:"Sleep, Hormones & Women's Health at THERAPY",
@@ -99,6 +98,29 @@ const pillars = [
  {h:'The low-mood or psychologically distressed woman',signs:'Persistent low mood, reduced motivation, anxiety, cognitive complaints or significant functional impairment.',plan:'Prioritise psychology and appropriate medical assessment, evidence-based treatment and coordinated sleep care. ExoMind may be considered only through a separately assessed clinician-directed pathway for an eligible indication, not as a general menopause treatment.'}]},
     connected:{heading:'Your health is connected.',headingEm:'Your care should be too.',paras:['You don\'t need to coordinate separate appointments across multiple places to begin understanding your sleep, hormones, mental wellbeing and changing body.','At THERAPY™, we bring clinical care, movement, recovery and lifestyle support together, with one coordinated pathway.'],collab:'Developed in collaboration with sleep expert Olivia Arezzolo and the clinical team at THERAPY™.',tagline:'Expert sleep education. Clinical oversight. Movement and strength. Personalised neurowellness.',begin:'Begin with your THERAPY™ Sleep, Hormonal & Whole-Body Health Assessment.'},
     cta:{label:'Email our nurse to begin',href:'mailto:hello@yourtherapy.au?subject=Perimenopause%20%26%20Menopause%20Programme%20%E2%80%94%20nurse%20enquiry'}},
+   across:{
+    stages:{kicker:'Women’s health across life',heading:'Your health is one connected story.',lead:'From your first period through midlife and beyond, hormones, brain, gut, sleep, heart, bones and the nervous system interact with everyday life. Timing and symptoms vary for every woman.',items:[
+     {h:'First period',when:'Puberty & menarche',change:'Oestrogen rises and cycles begin. Early cycles may be irregular as brain–ovary signalling matures.',helps:'Build bone through adequate food and activity. Seek advice for very heavy bleeding, severe pain or symptoms affecting daily life.'},
+     {h:'Reproductive years',when:'Cycles & life transitions',change:'Oestrogen and progesterone vary across the cycle. Egg number and quality decline with age, especially from the mid-30s.',helps:'Discuss fertility goals early. Review persistent cycle, mood or sleep concerns rather than assuming they are normal.'},
+     {h:'Perimenopause',when:'Often the 40s; timing varies',change:'Cycles become less predictable and oestrogen can fluctuate markedly — not a smooth decline. Hot flushes, broken sleep, mood or attention changes may occur; bone loss can accelerate.',helps:'Assess symptoms and other causes. Discuss contraception, bone, heart health and treatment options.'},
+     {h:'Postmenopause',when:'After the final period',change:'Confirmed after 12 months without periods. Symptoms may ease or persist; bone and heart risk reflect ageing and other factors.',helps:'Continue tailored prevention — strength, bone, heart and metabolic health — with regular review.'}],
+     note:'Perimenopause may last 2–10 years. Symptoms can begin in the late 30s, but suspected menopause before 40 needs medical assessment. Pregnancy and postpartum are a separate transition — postpartum fatigue or low mood does not diagnose perimenopause.',
+     facts:[{h:'Irregular periods',t:'do not mean contraception is unnecessary. Pregnancy is still possible in perimenopause.'},{h:'MHT / HRT',t:'is not contraception, and is not recommended solely to prevent heart disease or dementia.'},{h:'A single hormone result',t:'does not explain every symptom. Assessment starts with your history.'},{h:'Brain fog',t:'is real — and it is not an Alzheimer’s diagnosis. Persistent or worsening changes deserve review.'}]},
+    exhaustion:{kicker:'Burnout & exhaustion',heading:'Exhaustion deserves an explanation.',lead:'When rest doesn’t feel like enough, we look at sleep, hormonal sensitivity, mood, stress and medical causes together. Several can be present at once.',items:[
+     {h:'Sleep & recovery',t:'Night sweats, insomnia, pain and caring demands can interrupt sleep. CBT-I has trial evidence for insomnia in peri- and postmenopausal women; sleep apnoea and restless legs need their own assessment.'},
+     {h:'Hormonal sensitivity & mood',t:'Hormonal change affects mood-related brain signalling, and some women are more sensitive than others. Depression can itself affect energy, sleep and concentration.'},
+     {h:'Work & caring load',t:'Ongoing work pressure, caring responsibilities and financial strain affect recovery. Practical support and workload adjustments matter alongside clinical care.'},
+     {h:'Other medical causes',t:'Iron deficiency from heavy periods, thyroid disease, medicines and sleep disorders can all cause fatigue — and can coexist with perimenopause. Calling everything hormonal can miss something treatable.'}],
+     close:'You don’t have to prove you’re struggling enough to deserve support.'},
+    pathway:{kicker:'How care works at THERAPY™',heading:'Care works better when it starts with your story.',steps:[
+     {h:'Start with your history',t:'A Registered Nurse takes your history: symptoms, cycle changes, sleep, exhaustion, stress, medicines, daily function and what you want help with.'},
+     {h:'Investigate when indicated',t:'Pathology is arranged where clinically indicated — chosen from your history, not a broad hormone panel.'},
+     {h:'See the GP',t:'The GP assesses symptoms and other causes. Eligible patients can access a Medicare-rebated menopause health assessment once every 12 months — ask about eligibility and any out-of-pocket fee.'},
+     {h:'Build a shared plan',t:'GP, psychologists, physiotherapists, nurses and nutrition support contribute according to your needs, with clear roles and appropriate referrals.'},
+     {h:'Treat & review',t:'The GP discusses, prescribes and monitors treatment. Together we review sleep, symptoms and daily function, and adjust the plan.'}],
+     review:'New, worsening or persistent symptoms; heavy or prolonged bleeding; bleeding between periods, after sex or after menopause; any new breast lump; or symptoms disrupting daily life.',
+     urgent:'Suddenly much heavier bleeding, or heavy bleeding with dizziness; severe chest pain or breathlessness; sudden confusion. Call 000 in Australia.',
+     source:'Adapted from THERAPY™’s Women’s Health Across Life evidence guide (November 2026). Educational information, not a personal treatment recommendation. Medicare eligibility for a health assessment does not mean programmes or classes are Medicare-funded.'}},
    title:"Sleep, Hormones & Women's Health", tagline:'Rest. Restore. Rebalance.',
    card:'Clinician-led support for sleep, perimenopause, menopause and the mood and energy shifts that come with them.',
    intro:'Sleep, hormones and mood are one system, not three.',
@@ -111,7 +133,7 @@ const pillars = [
    title:'Strength, Movement & Bone Health', tagline:'Strong for life. Not just for today.',
    card:'Progressive strength, bone health and functional movement — meeting you at your level and progressing with you.',
    intro:'Build muscle. Support your bones. Move with confidence.',
-   ctas:[{label:'Explore the Studio',href:'THERAPY%20Studio%20v4.dc.html',primary:true},{label:'Book a movement assessment',href:BOOK}],
+   ctas:[{label:'Explore the Studio',href:'THERAPY%20Studio%20v4.dc.html',primary:true},{label:'Book a movement assessment',href:BOOK,booking:'technogym-assessment'}],
    lead:['Strength is about far more than fitness. It supports the way you carry yourself, move through everyday life, maintain your independence and feel capable in your body.','As we age, changes in muscle, bone health, balance and physical capacity can influence how we move and feel. For women navigating perimenopause and menopause, these changes deserve particular attention.'],
    together:'At THERAPY™, we bring together purposeful movement, progressive strength training, Pilates, bone health education and physical assessment to support strength through every stage of life.',
    togetherNote:'Not simply a workout. A more informed approach to moving well for longer.',
@@ -135,7 +157,7 @@ const pillars = [
     {h:'Movement Through Menopause',t:'Strength, functional movement and recovery education tailored to the changing needs of women in midlife.'},
     {h:'Healthy Ageing',t:'Maintain strength, mobility and functional independence with accessible, appropriately progressed movement.'}]},
    servicesKicker:'Go further with THERAPY™', servicesHeading:'Movement, measurement and support under one roof.',
-   start:{kicker:'Your starting point',heading:"You don't have to be fit to begin.",body:'You may be returning to exercise, navigating menopause, rebuilding confidence in your movement or simply wanting to invest in your future health.',tag:'Start where you are. Build from there.',ctas:[{label:'Explore classes',href:'THERAPY%20Studio%20v4.dc.html',primary:true},{label:'Book an assessment',href:BOOK}]},
+   start:{kicker:'Your starting point',heading:"You don't have to be fit to begin.",body:'You may be returning to exercise, navigating menopause, rebuilding confidence in your movement or simply wanting to invest in your future health.',tag:'Start where you are. Build from there.',ctas:[{label:'Explore classes',href:'THERAPY%20Studio%20v4.dc.html',primary:true},{label:'Book an assessment',href:BOOK,booking:'technogym-assessment'}]},
    explore:[chip('Pilates Eltham','THERAPY%20Studio%20v4.dc.html'),chip('Reformer Pilates'),chip('Strength training','THERAPY%20Studio%20v4.dc.html'),chip('Bone health'),chip('Balance and mobility'),chip('Healthy ageing'),chip('Studio timetable','THERAPY%20Studio%20v4.dc.html')],
    services:[{name:"THERAPY Studio",img:'uploads/Seated%20cable%20workout%20by%20the%20mirror.png',area:"Studio",mind:"Regular exercise is strongly associated with improved mood and lower anxiety.",body:"Strength, Pilates, mobility and restorative movement classes.",href:'THERAPY%20Studio%20v4.dc.html',cta:'Visit'},{name:"Technogym Physical Assessment",img:'uploads/THERAPY_TechnoGym.jpg',area:"Diagnostics & Testing",mind:"Objective data that replaces guesswork and helps sustain motivation over time.",body:"Explore relevant body composition, physical performance and functional fitness measures, depending on the assessment selected and equipment capabilities.",href:BOOK,cta:'Book'},{name:"VO2 Max Testing",img:'uploads/THERAPY_VO2Max.jpg',area:"Diagnostics & Testing",mind:"Cardiorespiratory fitness is associated in research with cognitive health and mood.",body:"Assess cardiorespiratory fitness using a supervised exercise testing protocol.",href:BOOK,cta:'Book'},{name:"ReOxy IHHT",img:'uploads/THERAPY_HRV%20Testing_01.jpg',area:"Diagnostics & Testing",mind:"Evidence for specific clinical outcomes remains emerging, and it is not a substitute for exercise training.",body:"An optional, separately assessed breathing-based service using alternating oxygen conditions — also used as a complementary, non-hormonal option for energy through perimenopause.",href:BOOK,cta:'Book'},{name:"Physiotherapy & Myotherapy",img:'uploads/THERAPY_Physiotherapy_02_noface.jpg',area:"Allied Health",mind:"Hands-on therapy that can ease the physical tension that accompanies chronic stress.",body:"Access individual musculoskeletal assessment and management where clinically indicated.",href:BOOK,cta:'Book'}] },
  { num:'04', slug:'recovery-performance', img:'uploads/THERAPY_ServicesArea_VR%20Meditation_RecoveryBoots.jpg', file:'Expertise%20Recovery%20Performance.dc.html', color:'#31261D', alt:'Recovery & Performance at THERAPY',
@@ -321,16 +343,21 @@ const MENUS = { 'recovery-performance':['massage'], 'skin-regenerative-health':[
 const NOTES = { 'recovery-performance': { h:'Ask about our combination packages', t:'Pair cryotherapy, hyperbaric oxygen, PBM, infrared sauna, compression and massage into a recovery program built around your training, injury or goals.' } };
 pillars.forEach(p => {
   (EXTRA[p.slug]||[]).forEach(x => { const i = p.services.findIndex(s => s.name === x.after); const o = Object.assign({}, x); delete o.after; p.services.splice(i < 0 ? p.services.length : i + 1, 0, o); });
-  p.services.forEach(s => { if (!s.href || s.href === BOOK) s.href = bookFor(s.name); });
+  
   (p.services||[]).forEach(s => { if (s.href && s.href.startsWith('mailto:')) s.cta = s.soon ? s.cta : 'Enquire'; });
   p.deep = DEEP[p.slug] || []; p.note = NOTES[p.slug] || null; p.menu = (MENUS[p.slug]||[]).map(k=>REGEN[k]); p.ritual = p.menu.length ? REGEN.ritual : null;
 });
 (function link(o, seen){ if(!o||typeof o!=='object'||seen.has(o)) return; seen.add(o);
   if(Array.isArray(o)) return o.forEach(x=>link(x,seen));
-  if(o.name && MOMENCE_IDS[o.name] && (!o.href || o.href===BOOK) && !o.soon) o.href = bookFor(o.name);
-  Object.values(o).forEach(v=>link(v,seen)); })([pillars, REGEN], new Set());
-window.THERAPY_EXPERTISE = { pillars, regen: REGEN, olivia: OLIVIA, sleepProgram: SLEEP_PROGRAM, booking: BOOK, bookFor, momenceIds: MOMENCE_IDS,
+  const isMomence = typeof o.href==='string' && /momence\.com\/appointments/.test(o.href);
+  if(o.name && SLUGS[o.name] && !o.soon && !NON_BOOKING[o.name] && (o.href===BOOK || !o.href || isMomence)){ o.booking = SLUGS[o.name]; o.href = B.bookingUrl(o.booking); }
+  else if(o.href===BOOK || isMomence){ o.booking = o.booking || 'nurse-consult'; o.href = B.bookingUrl(o.booking); }
+  Object.values(o).forEach(v=>link(v,seen)); })([pillars, REGEN, OLIVIA, SLEEP_PROGRAM], new Set());
+window.THERAPY_EXPERTISE = { pillars, regen: REGEN, olivia: OLIVIA, sleepProgram: SLEEP_PROGRAM, booking: B.BOOKING['nurse-consult'], bookFor, slugs: SLUGS,
   spans: (w) => { w = w || (typeof window!=='undefined'?window.innerWidth:1280); return w>=1024?[3,3,3,3,4,4,4]:w>=640?[6,6,6,6,6,6,12]:[12,12,12,12,12,12,12]; },
   withSpans: (list, w) => { const sp = window.THERAPY_EXPERTISE.spans(w); return list.map((p,i)=>Object.assign({}, p, { span: 'span '+sp[i] })); },
   bySlug: s => pillars.find(p => p.slug === s), featured: ['brain-mind-nervous-system','sleep-hormones-womens-health','strength-movement-bone-health','recovery-performance','gut-metabolic-longevity','skin-regenerative-health','nourish'] };
+}
+if (window.THERAPY_BOOKING) build();
+else if (typeof document !== 'undefined') { const s=document.createElement('script'); s.src='data/booking.js?v=20261111'; s.onload=build; (document.head||document.documentElement).appendChild(s); }
 })();
