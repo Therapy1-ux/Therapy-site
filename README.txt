@@ -1,20 +1,23 @@
-THERAPY site update — 12 Nov 2026
-Repo: Therapy1-ux/therapy-site (branch: main)
+THERAPY site update — 16 Nov 2026
 
-HOW TO UPLOAD
-1. Unzip on your computer.
-2. github.com/Therapy1-ux/therapy-site > Add file > Upload files.
-3. Drag in EVERYTHING inside this folder (not the folder itself). Keep "batch-nov12-images" and "data" as folders.
-4. Commit directly to main. Wait ~2 min, hard-refresh yourtherapy.au (Cmd/Ctrl + Shift + R).
+Upload these files to the site root (replace existing):
+  index.html, sorrento.html, memberships.html, gift-vouchers.html,
+  studio.html, menu.html, expertise-data.js, support.js, image-slot.js
 
-CLEAN-UP (files uploaded to the wrong place on 12 Nov — safe to delete from the repo root):
-hotel-sorrento.html, hotel-sorrento-pool.png, Salt_House131A5017.jpg, THERAPY_Physiotherapy_02_nude.jpg,
-web-THERAPY_IVDrips.jpg, web-THERAPY_Lounge_Restaurant_Area_02.jpg, web-THERAPY_PshycologyRoom.jpg,
-THERAPY_Drinks_Menu_140x350mm-4.pdf, THERAPY_Spring_Summer_2026_Full_Menu_Full_Bleed_Cover.pdf,
-THERAPY_Spring_Summer_2026_Full_Menu_Full_Bleed_Cover-4f03b166.pdf
+NEW page:
+  iv-therapy.html  (not linked in the menu yet)
 
-CHECK
-- Any expertise page > click a service — opens the page (no 404)
-- sorrento.html — pool photo, smoothie benefits, SuperNovas & Lululemon in Run Club
-- Sleep, Hormones & Women's Health — Olivia near top
-- Menu PDFs open
+NEW media — upload to /uploads/:
+  uploads/THERAPY_IceBath.mp4  (Sorrento Recovery box, 14.9 MB)
+
+All other images are already on the site and are not included, to keep the upload small.
+
+What changed:
+- Sorrento residency dates 27 Dec – 17 Jan; IV Nurse Consultation Square link; Recovery video
+- Homepage: Black Friday special in the pop-up; brass "Christmas Gift Vouchers & Packages" + Santa hat in menu
+- Memberships: Black Friday section + tags on every level (unlimited cryo, bring a friend until Christmas); 10% off events, massages & facials for Level 2+; Family membership moved up; brass Founding deal + Join buttons; cards re-laid with text at top; REGULATE + Studio $108
+- Gift Vouchers: Black Friday box; form removed — single "Purchase now" to Momence; brass background; wordmark in Christmas Collection label
+- Studio: unlimited cryo on prepaid + MOVE Unlimited; REGULATE + Studio $108
+- Menu: Wanderlust Blue Spirulina added
+- expertise-data.js: RESTORE + PBM $150; Wanderlust Blue Spirulina
+- IV Therapy page: new (consult $99, 7 days notice, 1–1.5 hrs)
