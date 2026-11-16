@@ -18,6 +18,7 @@ What changed:
 - Memberships: Black Friday section + tags on every level (unlimited cryo, bring a friend until Christmas); 10% off events, massages & facials for Level 2+; Family membership moved up; brass Founding deal + Join buttons; cards re-laid with text at top; REGULATE + Studio $108
 - Gift Vouchers: Black Friday box; form removed — single "Purchase now" to Momence; brass background; wordmark in Christmas Collection label
 - Studio: unlimited cryo on prepaid + MOVE Unlimited; REGULATE + Studio $108
+- Studio + Memberships: new MOVE Flexible membership — $79/week, unlimited classes, unlimited cryotherapy, cancel with 30 days’ notice (momence.com/m/982417)
 - Menu: Wanderlust Blue Spirulina added
 - expertise-data.js: RESTORE + PBM $150; Wanderlust Blue Spirulina
 - IV Therapy page: new (consult $99, 7 days notice, 1–1.5 hrs)
